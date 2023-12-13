@@ -23,8 +23,8 @@ async function getTodos(req, res, next) {
 
 async function deleteTodo(req, res, next) {
   try {
-    let id = req.params.id;
-    res.send(await todoService.deleteTodo(id));
+    await todoService.deleteTodo(req.params.id);
+    res.end();
   } catch (err) {
     next(err);
   }
