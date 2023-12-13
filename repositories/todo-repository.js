@@ -30,7 +30,7 @@ async function getTodosByDone(done) {
 
 async function deleteTodo(id) {
   try {
-    await Todo.destroy({
+    return await Todo.destroy({
       where: {
         id,
       },
@@ -53,10 +53,24 @@ async function updateTodo(todo) {
   }
 }
 
+async function updateTodoDone(todo) {
+  try {
+    await Todo.update(todo, {
+      where: {
+        id: todo.id,
+      },
+    });
+    return await Todo.findByPk(todo.id);
+  } catch (err) {
+    throw err;
+  }
+}
+
 export default {
   insertTodo,
   getTodos,
   getTodosByDone,
   updateTodo,
   deleteTodo,
+  updateTodoDone,
 };
