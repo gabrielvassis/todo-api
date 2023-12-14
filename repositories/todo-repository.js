@@ -10,18 +10,11 @@ async function insertTodo(todo) {
 
 async function getTodos() {
   try {
-    return await Todo.findAll();
-  } catch (err) {
-    throw err;
-  }
-}
-
-async function getTodosByDone(done) {
-  try {
     return await Todo.findAll({
-      where: {
-        done,
-      },
+      order: [
+        ["done", "ASC"],
+        ["id", "ASC"],
+      ],
     });
   } catch (err) {
     throw err;
@@ -69,7 +62,6 @@ async function updateTodoDone(todo) {
 export default {
   insertTodo,
   getTodos,
-  getTodosByDone,
   updateTodo,
   deleteTodo,
   updateTodoDone,
